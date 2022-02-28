@@ -18,15 +18,15 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Enter the root directory of web project
-      run: |
-        cd webservice
-        ls -al
-
     - name: Install dependencies
       run: |
+        ls -al
+        cd webservice
+        ls -al
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
+
     - name: Run unittest
       run: |
+        cd webservice
         python3 test/test_main.py
