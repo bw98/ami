@@ -1,0 +1,55 @@
+{
+    "builders": [{
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "region": "{{user `aws_region`}}",
+
+        "instance_type": "t2.micro",
+        "source_ami": "{{user `source_ami`}}",
+
+        "communicator": "ssh",
+        "ssh_username": "ec2-user",
+
+        "ami_name": "csye6225_{{timestamp}}",
+        "ami_description": "AMI for CSYE 6225",
+        "ami_users": [
+            "{{user `ami_user_dev`}}",
+            "{{user `ami_user_demo`}}"
+        ],
+        "launch_block_device_mappings": [{
+            "device_name": "/dev/xvda",
+            "volume_size": 20,
+            "volume_type": "gp2",
+            "delete_on_termination": true
+        }]
+    }],
+
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./webservice.zip",
+            "destination": "/home/ec2-user/"
+        },
+        {
+            "type": "file",
+            "source": "./webservice.service",
+            "destination": "/home/ec2-user/"
+        },
+        {
+            "type": "file",
+            "source": "./webservice_start.sh",
+            "destination": "/home/ec2-user/"
+        },
+        {
+            "type": "file",
+            "source": "./webservice_stop.sh",
+            "destination": "/home/ec2-user/"
+        },
+        {
+            "type": "shell",
+            "script": "./install_env.sh"
+        }
+    ]
+}
+

@@ -1,0 +1,15 @@
+[Unit]
+Description=CSYE6225 webservice
+After=network.target mariadb.service
+Requires=mariadb.service
+
+[Service]
+ExecStart=/usr/bin/sh /home/ec2-user/webservice_start.sh
+ExecStop=/usr/bin/sh /home/ec2-user/webservice_stop.sh
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user
+
+[Install]
+WantedBy=multi-user.target
+
