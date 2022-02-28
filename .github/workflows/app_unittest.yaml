@@ -28,5 +28,7 @@ jobs:
 
     - name: Run unittest
       run: |
+        ls -al
         cd webservice
+        ls -al
         python3 test/test_main.py
