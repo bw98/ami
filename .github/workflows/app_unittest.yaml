@@ -10,7 +10,7 @@ jobs:
     - name: Checkout repo and submodules
       uses: actions/checkout@v2
       with:
-        submodules: 'true'
+        submodules: recursive
         token: ${{ secrets.PAT }}
 
     - name: Set up Python 3.9
@@ -21,6 +21,7 @@ jobs:
     - name: Enter the root directory of web project
       run: |
         cd webservice
+        ls -al
 
     - name: Install dependencies
       run: |
