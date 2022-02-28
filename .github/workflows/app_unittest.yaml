@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout code
+    - name: Checkout repo and submodules
       uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
