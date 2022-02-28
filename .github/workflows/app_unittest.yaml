@@ -1,0 +1,28 @@
+on: 
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Enter the root directory of web project
+      run: |
+        cd webservice
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+    - name: Run unittest
+      run: |
+        python3 test/test_main.py

@@ -1,0 +1,8 @@
+{
+    "aws_access_key": "{{ env `aws_access_key` }}",
+    "aws_secret_key": "{{ env `aws_secret_key` }}",
+    "ami_user_dev": "413872948558",
+    "ami_user_demo": "525744894242",
+    "aws_region": "us-east-1",
+    "source_ami": "ami-033b95fb8079dc481"
+}

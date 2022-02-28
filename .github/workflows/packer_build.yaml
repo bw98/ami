@@ -1,0 +1,37 @@
+on: 
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Validate packer template
+      uses: hashicorp/packer-github-actions@master
+      with:
+        command: validate
+        arguments: "-syntax-only -var-file=vars.json"
+        target: ami.json
+      env:  
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        PACKER_LOG: 1
+        
+    - name: Build app artifact
+      run: |
+        zip -r webservice.zip webservice
+
+    - name: Build AMI
+      uses: hashicorp/packer-github-actions@master
+      with:
+        command: build
+        arguments: "-var-file=var.json"
+        target: ami.json
+      env:  
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        PACKER_LOG: 1
