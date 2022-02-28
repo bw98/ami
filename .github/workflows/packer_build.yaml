@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout repo and submodules
       uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
     - name: Validate packer template
       uses: hashicorp/packer-github-actions@master
