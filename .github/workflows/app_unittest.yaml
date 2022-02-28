@@ -1,10 +1,9 @@
 on: 
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
   unittest:
-    if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
 
     steps:
