@@ -17,7 +17,7 @@ jobs:
       uses: hashicorp/packer-github-actions@master
       with:
         command: validate
-        arguments: "-syntax-only -var-file=vars.json"
+        arguments: "-syntax-only -var-file=var.json"
         target: ami.json
       env:  
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
