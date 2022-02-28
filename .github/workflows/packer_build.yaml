@@ -10,7 +10,8 @@ jobs:
     - name: Checkout repo and submodules
       uses: actions/checkout@v2
       with:
-        submodules: recursive
+        submodules: 'true'
+        token: ${{ secrets.PAT }}
 
     - name: Validate packer template
       uses: hashicorp/packer-github-actions@master
