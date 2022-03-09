@@ -5,7 +5,7 @@
         "secret_key": "{{user `aws_secret_key`}}",
         "region": "{{user `aws_region`}}",
 
-        "instance_type": "t2.micro",
+        "instance_type": "t2.micro"
         "source_ami": "{{user `source_ami`}}",
 
         "communicator": "ssh",
