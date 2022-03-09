@@ -1,9 +1,9 @@
-on: 
-  push:
+on:
+  pull_request:
     branches: [ main ]
 
 jobs:
-  packer-build:
+  packer-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,16 +12,12 @@ jobs:
       with:
         submodules: recursive
         token: ${{ secrets.PAT }}
-        
-    - name: Build app artifact
-      run: |
-        zip -r webservice.zip webservice
 
-    - name: Build AMI
+    - name: Validate packer template
       uses: hashicorp/packer-github-actions@master
       with:
-        command: build
-        arguments: "-var-file=var.json"
+        command: validate
+        arguments: "-syntax-only -var-file=var.json"
         target: ami.json
       env:  
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
